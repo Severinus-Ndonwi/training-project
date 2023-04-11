@@ -45,7 +45,8 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         buildContext: $(Build.SourcesDirectory)/GloboTicket
         tags: |
-          $(tag)
+          $(imageRepository):$(tag)-$Build.SourceBranchName)
+          $(tag)-dev
 
     # - script: |
     #     sudo apt-get install rpm
@@ -60,9 +61,9 @@ stages:
     #         trivy image --exit-code 0 --severity LOW,MEDIUM $(imageRepository):$(tag)
     #         trivy image --exit-code 1 --severity HIGH,CRITICAL $(imageRepository):$(tag)
     
-    - script: |
-        sudo docker tag $(imageRepository):$(tag) $(containerRegistry)/$(imageRepository):$(tag)
-      displayName: 'Tag container image before push'
+    # - script: |
+    #     sudo docker tag $(imageRepository):$(tag) $(containerRegistry)/$(imageRepository):$(tag)
+    #   displayName: 'Tag container image before push'
     - task: Docker@2
       displayName: Push the image to container registry
       inputs:
@@ -72,7 +73,8 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         buildContext: $(Build.SourcesDirectory)/GloboTicket
         tags: |
-          $(tag)
+          $(imageRepository):$(tag)-$Build.SourceBranchName)
+          $(tag)-dev
     
 # - stage: Deploy
 #   displayName: Deploy to k8s
