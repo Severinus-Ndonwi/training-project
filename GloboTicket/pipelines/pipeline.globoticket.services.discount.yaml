@@ -44,6 +44,7 @@ stages:
         buildContext: $(Build.SourcesDirectory)/GloboTicket
         tags: |
           $(tag)-dev
+          latest-dev
 # - stage: Deploy
 #   displayName: Deploy to k8s
 #   jobs:  
