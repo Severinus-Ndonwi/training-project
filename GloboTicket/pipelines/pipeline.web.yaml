@@ -45,7 +45,7 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         buildContext: $(Build.SourcesDirectory)/GloboTicket
         tags: |
-          $(imageRepository):$(tag)-$Build.SourceBranchName)
+          $(imageRepository)-$(tag)-$Build.SourceBranchName)
           $(tag)-dev
 
     # - script: |
@@ -73,7 +73,7 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         buildContext: $(Build.SourcesDirectory)/GloboTicket
         tags: |
-          $(imageRepository):$(tag)-$Build.SourceBranchName)
+          $(imageRepository)-$(tag)-$Build.SourceBranchName)
           $(tag)-dev
     
 # - stage: Deploy
