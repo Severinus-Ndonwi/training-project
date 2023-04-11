@@ -46,6 +46,7 @@ stages:
         buildContext: $(Build.SourcesDirectory)/GloboTicket
         tags: |
           $(tag)-dev
+          latest-dev
 
     # - script: |
     #     sudo apt-get install rpm
@@ -73,6 +74,7 @@ stages:
         buildContext: $(Build.SourcesDirectory)/GloboTicket
         tags: |
           $(tag)-dev
+          latest-dev
     
 # - stage: Deploy
 #   displayName: Deploy to k8s
