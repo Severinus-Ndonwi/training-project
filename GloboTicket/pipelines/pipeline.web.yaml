@@ -16,7 +16,7 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '1d6b38f9-70e4-4942-82df-d79fccbed868'
+  dockerRegistryServiceConnection: '82493bb5-9473-4e9f-9848-6b1653340554'
   imageRepository: 'globoticket.web'
   containerRegistry: 'globoticketsacr.azurecr.io'
   dockerfilePath: 'GloboTicket/GloboTicket.Client/Dockerfile'
