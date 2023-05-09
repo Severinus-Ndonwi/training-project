@@ -15,9 +15,9 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '82493bb5-9473-4e9f-9848-6b1653340554'
+  dockerRegistryServiceConnection: '02e076ef-03bf-495b-bb34-d499c56b86a0'
   imageRepository: 'globoticket.services.ordering'
-  containerRegistry: 'globoticketsacr.azurecr.io'
+  containerRegistry: 'globoacr.azurecr.io'
   dockerfilePath: 'GloboTicket/GloboTicket.Services.Order/Dockerfile'
   tag: '$(Build.BuildId)'
   deploymentFile: 'aks-globoticket.services.ordering.yaml'
