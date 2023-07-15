@@ -16,6 +16,7 @@ resources:
 - repo: self
 
 variables:
+- group: acr-registry
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: '02e076ef-03bf-495b-bb34-d499c56b86a0'
   imageRepository: 'globoticket.services.discount'
@@ -23,7 +24,7 @@ variables:
   dockerfilePath: 'GloboTicket/GloboTicket.Services.Discount/Dockerfile'
   tag: '$(Build.BuildId)'
   deploymentFile: 'aks-globoticket.services.discount.yaml'
-  - group: acr-registry
+ 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
