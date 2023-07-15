@@ -92,9 +92,9 @@ stages:
         containerRegistryType: 'Container Registry'
         dockerRegistryEndpoint: 'CloudPro Registry'
         secretName: 'acr-secret'
-    - task: Bash@3
-      inputs:
-        targetType: 'inline'
-        script: |
-          # Write your commands here
-          kubectl create secret docker-registry acr-secret --docker-server=$(registryServer) --docker-username=$(registryUser) --docker-password='$(registryPassword)'--namespace=$(current_namespace)
+    # - task: Bash@3
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       # Write your commands here
+    #       kubectl create secret docker-registry acr-secret --docker-server=$(registryServer) --docker-username=$(registryUser) --docker-password='$(registryPassword)'--namespace=$(current_namespace)
