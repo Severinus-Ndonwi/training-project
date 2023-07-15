@@ -16,7 +16,7 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '82493bb5-9473-4e9f-9848-6b1653340554'
+  dockerRegistryServiceConnection: '02e076ef-03bf-495b-bb34-d499c56b86a0'
   imageRepository: 'globoticket.services.discount'
   containerRegistry: 'globoticketsacr.azurecr.io'
   dockerfilePath: 'GloboTicket/GloboTicket.Services.Discount/Dockerfile'
@@ -45,36 +45,49 @@ stages:
         tags: |
           $(tag)-dev
           latest-dev
-# - stage: Deploy
-#   displayName: Deploy to k8s
-#   jobs:  
-#   - job: Deploy
-#     displayName: Deploy to k8s
-#     pool:
-#       vmImage: $(vmImageName)
-#     steps:
-#     - task: replacetokens@3
-#       inputs:
-#         rootDirectory: '$(Build.SourcesDirectory)/GloboTicket'
-#         targetFiles: '$(deploymentFile)'
-#         encoding: 'auto'
-#         writeBOM: true
-#         actionOnMissing: 'warn'
-#         keepToken: false
-#         tokenPrefix: '#{'
-#         tokenSuffix: '}#'
-#         useLegacyPattern: false
-#         enableTelemetry: true
-#     - task: Kubernetes@1
-#       inputs:
-#         connectionType: 'Kubernetes Service Connection'
-#         kubernetesServiceEndpoint: 'globoticket-aks'
-#         namespace: 'default'
-#         command: 'apply'
-#         useConfigurationFile: true
-#         configuration: '$(Build.SourcesDirectory)/GloboTicket/$(deploymentFile)'
-#         secretType: 'dockerRegistry'
-#         containerRegistryType: 'Azure Container Registry'
-#         azureSubscriptionEndpointForSecrets: 'MVPSponsorship (e57087a4-a053-48c9-8857-995316398cdc)'
-#         azureContainerRegistry: 'globoticket.azurecr.io'
-#         secretName: 'pullkey'
+- stage: Deploy
+  displayName: Deploy to k8s
+  jobs:  
+  - job: Deploy
+    displayName: Deploy to k8s
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: replacetokens@3
+      inputs:
+        rootDirectory: '$(Build.SourcesDirectory)/GloboTicket'
+        targetFiles: '$(deploymentFile)'
+        encoding: 'auto'
+        writeBOM: true
+        actionOnMissing: 'warn'
+        keepToken: false
+        tokenPrefix: '#{'
+        tokenSuffix: '}#'
+        useLegacyPattern: false
+        enableTelemetry: true
+    # - task: Kubernetes@1
+    #   inputs:
+    #     connectionType: 'Kubernetes Service Connection'
+    #     kubernetesServiceEndpoint: 'globoticket-aks'
+    #     namespace: 'default'
+    #     command: 'apply'
+    #     useConfigurationFile: true
+    #     configuration: '$(Build.SourcesDirectory)/GloboTicket/$(deploymentFile)'
+    #     secretType: 'dockerRegistry'
+    #     containerRegistryType: 'Azure Container Registry'
+    #     azureSubscriptionEndpointForSecrets: 'MVPSponsorship (e57087a4-a053-48c9-8857-995316398cdc)'
+    #     azureContainerRegistry: 'globoticket.azurecr.io'
+    #     secretName: 'pullkey'
+    
+    - task: Kubernetes@1
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceEndpoint: 'cloudpro k8s svc connecton'
+        namespace: 'cloudpro'
+        command: 'apply'
+        useConfigurationFile: true
+        configuration: '$(Build.SourcesDirectory)/GloboTicket/$(deploymentFile)'
+        secretType: 'dockerRegistry'
+        containerRegistryType: 'Container Registry'
+        dockerRegistryEndpoint: 'CloudPro Registry'
+        secretName: 'acr-secret'
