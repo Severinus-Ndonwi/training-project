@@ -5,7 +5,7 @@
 trigger:
   branches:
     include:
-    - master
+    - containarized_aks_allup
   paths:
     include:
     - GloboTicket/GloboTicket.Services.Discount/*
