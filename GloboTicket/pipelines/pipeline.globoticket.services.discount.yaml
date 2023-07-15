@@ -23,6 +23,7 @@ variables:
   dockerfilePath: 'GloboTicket/GloboTicket.Services.Discount/Dockerfile'
   tag: '$(Build.BuildId)'
   deploymentFile: 'aks-globoticket.services.discount.yaml'
+  - group: acr-registry
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
@@ -45,6 +46,7 @@ stages:
         buildContext: $(Build.SourcesDirectory)/GloboTicket
         tags: |
           $(tag)
+
 - stage: Deploy
   displayName: Deploy to k8s
   jobs:  
@@ -78,7 +80,6 @@ stages:
     #     azureSubscriptionEndpointForSecrets: 'MVPSponsorship (e57087a4-a053-48c9-8857-995316398cdc)'
     #     azureContainerRegistry: 'globoticket.azurecr.io'
     #     secretName: 'pullkey'
-    
     - task: Kubernetes@1
       inputs:
         connectionType: 'Kubernetes Service Connection'
@@ -91,3 +92,9 @@ stages:
         containerRegistryType: 'Container Registry'
         dockerRegistryEndpoint: 'CloudPro Registry'
         secretName: 'acr-secret'
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Write your commands here
+          kubectl create secret docker-registry acr-secret --docker-server=$(registryServer) --docker-username=$(registryUser) --docker-password='$(registryPassword)'--namespace=$(current_namespace)
