@@ -23,8 +23,9 @@ variables:
   dockerfilePath: 'GloboTicket/GloboTicket.Services.Discount/Dockerfile'
   tag: '$(Build.BuildId)'
   deploymentFile: 'aks-globoticket.services.discount.yaml'
-  - group: acr-registry
-  
+  - group:
+     - acr-registry
+
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
