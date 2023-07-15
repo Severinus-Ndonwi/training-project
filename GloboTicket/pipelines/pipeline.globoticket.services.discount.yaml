@@ -44,8 +44,7 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         buildContext: $(Build.SourcesDirectory)/GloboTicket
         tags: |
-          $(tag)-dev
-          latest-dev
+          $(tag)
 - stage: Deploy
   displayName: Deploy to k8s
   jobs:  
