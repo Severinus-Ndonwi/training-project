@@ -26,6 +26,7 @@ variables:
   # - group: acr-registry
   - group: Pipeline-variables-18-Jul
   # Agent VM image name
+pool:
   vmImageName: 'ubuntu-latest'
 
 stages:
