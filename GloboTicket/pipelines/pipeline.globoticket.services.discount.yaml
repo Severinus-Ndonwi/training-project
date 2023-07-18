@@ -84,8 +84,8 @@ stages:
     - task: Kubernetes@1
       inputs:
         connectionType: 'Kubernetes Service Connection'
-        kubernetesServiceEndpoint: 'k8s-sa-svc connection'
-        namespace: 'devops'
+        kubernetesServiceEndpoint: 'sa-k8s-svc-connection'
+        namespace: 'devops-ns'
         command: 'apply'
         useConfigurationFile: true
         configuration: '$(Build.SourcesDirectory)/GloboTicket/$(deploymentFile)'
